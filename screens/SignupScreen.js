@@ -1,0 +1,148 @@
+// src/screens/SignupScreen.js
+import React, { useState } from "react"; // <<--- تأكد من استيراد useState
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+  Alert,
+} from "react-native";
+import CustomButton from "../components/Button"; // استخدام الزر المخصص
+
+// (اختياري) لتخزين المستخدمين الجدد بشكل وهمي (لن يتم استخدامه مباشرة للدخول في هذا المثال)
+// let FAKE_REGISTERED_USERS = [];
+
+const SignupScreen = ({ navigation, onLoginSuccess }) => {
+  // onLoginSuccess إذا أردت تسجيل دخول تلقائي
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handleSignup = () => {
+    if (
+      !username.trim() ||
+      !email.trim() ||
+      !password.trim() ||
+      !confirmPassword.trim()
+    ) {
+      Alert.alert("خطأ", "الرجاء ملء جميع الحقول");
+      return;
+    }
+    // تحقق بسيط من شكل الإيميل
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      Alert.alert("خطأ", "الرجاء إدخال بريد إلكتروني صالح.");
+      return;
+    }
+    if (password.length < 6) {
+      Alert.alert("خطأ", "يجب أن تكون كلمة المرور 6 أحرف على الأقل.");
+      return;
+    }
+    if (password !== confirmPassword) {
+      Alert.alert("خطأ", "كلمتا المرور غير متطابقتين");
+      return;
+    }
+
+    const newUser = { username, email: email.toLowerCase(), password };
+    // FAKE_REGISTERED_USERS.push(newUser);
+    console.log("New user registered (simulated):", newUser);
+
+    Alert.alert("نجاح", "تم إنشاء الحساب بنجاح! يمكنك الآن تسجيل الدخول.", [
+      { text: "موافق", onPress: () => navigation.navigate("Login") },
+      // إذا أردت تسجيل دخول تلقائي بعد التسجيل (يتطلب تعديل منطق LoginScreen ليتعرف على المستخدم الجديد):
+      // { text: "موافق وتسجيل الدخول", onPress: () => {
+      //     // هنا يجب تعديل FAKE_USER في LoginScreen أو استخدام آلية أخرى
+      //     // لجعل LoginScreen تتعرف على newUser
+      //     if (typeof onLoginSuccess === 'function') {
+      //       onLoginSuccess();
+      //     }
+      //   }
+      // }
+    ]);
+  };
+
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.title}>إنشاء حساب جديد</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="اسم المستخدم"
+        value={username}
+        onChangeText={setUsername}
+        autoCapitalize="words"
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="البريد الإلكتروني"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+        autoCapitalize="none"
+        textContentType="emailAddress"
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="كلمة المرور (6 أحرف على الأقل)"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+        textContentType="newPassword" // مساعدة لمدير كلمات المرور
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="تأكيد كلمة المرور"
+        value={confirmPassword}
+        onChangeText={setConfirmPassword}
+        secureTextEntry
+        textContentType="newPassword"
+      />
+      <CustomButton title="إنشاء الحساب" onPress={handleSignup} />
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Login")}
+        style={styles.linkContainer}
+      >
+        <Text style={styles.linkText}>لديك حساب بالفعل؟ تسجيل الدخول</Text>
+      </TouchableOpacity>
+    </ScrollView>
+  );
+};
+
+// استخدام نفس أنماط LoginScreen مع تعديلات طفيفة إذا لزم الأمر
+const styles = StyleSheet.create({
+  container: {
+    flexGrow: 1, // للسماح بالتمرير إذا كانت الحقول كثيرة
+    justifyContent: "center",
+    padding: 20,
+    backgroundColor: "#f5f5f5",
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 30,
+    color: "#333",
+  },
+  input: {
+    height: 50,
+    borderColor: "#ddd",
+    borderWidth: 1,
+    marginBottom: 15,
+    paddingHorizontal: 15,
+    borderRadius: 8,
+    backgroundColor: "#fff",
+    fontSize: 16,
+  },
+  linkContainer: {
+    marginTop: 20,
+  },
+  linkText: {
+    color: "#007bff",
+    textAlign: "center",
+    fontSize: 16,
+  },
+});
+
+export default SignupScreen;
