@@ -1,12 +1,8 @@
-// src/components/Rating.js
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
-const Star = (
-  { filled, onPress, size = 30, disabled } // إضافة disabled prop
-) => (
+const Star = ({ filled, onPress, size = 30, disabled }) => (
   <TouchableOpacity onPress={onPress} disabled={disabled || !onPress}>
-    {/* تعديل هنا */}
     <Text style={{ fontSize: size, color: filled ? "gold" : "lightgray" }}>
       {filled ? "★" : "☆"}
     </Text>
@@ -26,7 +22,6 @@ const Rating = ({
       <Star
         key={i}
         filled={i <= currentRating}
-        // تعديل هنا ليمرر disabled بشكل صحيح بناءً على editable و onRate
         onPress={
           editable && typeof onRate === "function" ? () => onRate(i) : null
         }
@@ -38,13 +33,11 @@ const Rating = ({
   return (
     <View style={styles.container}>
       <View style={styles.starsContainer}>{stars}</View>
-      {/* عرض متوسط التقييم وعدد التقييمات إذا كانا موجودين */}
       {totalRatings !== undefined && currentRating !== undefined && (
         <Text style={styles.ratingText}>
           ({currentRating.toFixed(1)} من {maxStars}) - {totalRatings} تقييم
         </Text>
       )}
-      {/* عرض تقييم المستخدم إذا كان editable و onRate موجودين ولكن لا يوجد totalRatings */}
       {editable &&
         typeof onRate === "function" &&
         totalRatings === undefined &&
@@ -53,7 +46,6 @@ const Rating = ({
             تقييمك: {currentRating.toFixed(1)} من {maxStars}
           </Text>
         )}
-      {/* عرض تقييم المستخدم إذا كان فقط للتقييم الجديد ولا يوجد تقييم سابق عام */}
       {!editable && totalRatings === undefined && currentRating > 0 && (
         <Text style={styles.ratingText}>
           التقييم: {currentRating.toFixed(1)} من {maxStars}

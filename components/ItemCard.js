@@ -1,28 +1,24 @@
-// src/components/ItemCard.js
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 
 const ItemCard = ({ item, onPress }) => (
   <TouchableOpacity style={styles.itemCard} onPress={onPress}>
-    {/* التحقق من وجود قيمة لـ item.image */}
     {item.image ? (
       <Image
-        // هذا السطر يتعامل مع كل من الـ URI (لصور النت) والمخرجات الرقمية لـ require()
         source={
           typeof item.image === "string" ? { uri: item.image } : item.image
         }
         style={styles.itemImage}
         onError={(error) =>
           console.log(
-            "Failed to load item image in ItemCard:", // سجل لتمييز الخطأ
-            item.name, // اسم الصنف للمساعدة في تحديد أي صورة فشلت
-            item.image, // قيمة item.image التي فشلت
+            "Failed to load item image in ItemCard:",
+            item.name,
+            item.image,
             error.nativeEvent.error
           )
         }
       />
     ) : (
-      // عرض عنصر نائب إذا لم تكن هناك صورة
       <View style={[styles.itemImage, styles.placeholderImage]}>
         <Text style={styles.placeholderText}>لا توجد صورة</Text>
       </View>
@@ -31,7 +27,6 @@ const ItemCard = ({ item, onPress }) => (
       <Text style={styles.itemName} numberOfLines={2} ellipsizeMode="tail">
         {item.name}
       </Text>
-      {/* numberOfLines لتجنب تجاوز النص */}
       <Text style={styles.itemPrice}>{item.price}₪</Text>
     </View>
   </TouchableOpacity>
@@ -39,26 +34,26 @@ const ItemCard = ({ item, onPress }) => (
 
 const styles = StyleSheet.create({
   itemCard: {
-    backgroundColor: "#ffffff", // تغيير لون الخلفية للأبيض
-    borderRadius: 10, // زيادة دائرية الحواف قليلاً
-    padding: 12, // تعديل الـ padding
+    backgroundColor: "#ffffff",
+    borderRadius: 10,
+    padding: 12,
     marginBottom: 12,
-    flexDirection: "row", // لترتيب الصورة والنصوص أفقيًا
-    alignItems: "center", // لمحاذاة الصورة والنصوص عموديًا في المنتصف
-    elevation: 3, // زيادة الظل قليلاً للأندرويد
+    flexDirection: "row",
+    alignItems: "center",
+    elevation: 3,
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 }, // تعديل إزاحة الظل
-    shadowOpacity: 0.1, // تقليل شفافية الظل قليلاً
-    shadowRadius: 2, // تعديل نصف قطر الظل
-    borderWidth: 1, // (اختياري) إضافة حد خفيف
-    borderColor: "#f0f0f0", // لون الحد
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    borderWidth: 1,
+    borderColor: "#f0f0f0", //
   },
   itemImage: {
-    width: 75, // تعديل عرض الصورة
-    height: 75, // تعديل ارتفاع الصورة
+    width: 75,
+    height: 75,
     borderRadius: 8,
-    marginRight: 12, // تعديل المسافة
-    backgroundColor: "#e9ecef", // لون خلفية احتياطي أفتح قليلاً
+    marginRight: 12,
+    backgroundColor: "#e9ecef",
   },
   placeholderImage: {
     justifyContent: "center",
@@ -66,22 +61,22 @@ const styles = StyleSheet.create({
   },
   placeholderText: {
     fontSize: 10,
-    color: "#6c757d", // لون أغمق قليلاً للنص النائب
+    color: "#6c757d",
   },
   itemInfo: {
-    flex: 1, // لجعل هذا الجزء يأخذ المساحة المتبقية
-    justifyContent: "center", // لتوسيط النصوص عمودياً داخل هذا الـ View
+    flex: 1,
+    justifyContent: "center",
   },
   itemName: {
-    fontSize: 17, // تعديل حجم الخط
-    fontWeight: "600", // تعديل سماكة الخط (أقل من bold)
-    color: "#343a40", // لون أغمق لاسم الصنف
+    fontSize: 17,
+    fontWeight: "600",
+    color: "#343a40",
     textAlign: "right",
-    marginBottom: 4, // إضافة مسافة صغيرة أسفل الاسم
+    marginBottom: 4,
   },
   itemPrice: {
-    fontSize: 15, // تعديل حجم الخط
-    color: "#28a745", // لون أخضر للسعر
+    fontSize: 15,
+    color: "#28a745",
     textAlign: "right",
     fontWeight: "500",
   },

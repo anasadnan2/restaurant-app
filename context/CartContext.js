@@ -1,4 +1,3 @@
-// src/context/CartContext.js
 import React, { createContext, useState, useReducer } from "react";
 
 export const CartContext = createContext({
@@ -10,7 +9,6 @@ export const CartContext = createContext({
   getCartTotal: () => 0,
 });
 
-// Reducer function to manage cart state
 const cartReducer = (state, action) => {
   switch (action.type) {
     case "ADD_ITEM":

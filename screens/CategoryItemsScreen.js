@@ -1,4 +1,3 @@
-// src/screens/CategoryItemsScreen.js
 import React from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
 import { DUMMY_ITEMS } from "../data/dummyData";
@@ -35,7 +34,7 @@ const CategoryItemsScreen = ({ route, navigation }) => {
       <FlatList
         data={items}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()} // الأفضل إضافة .toString() للمفتاح
+        keyExtractor={(item) => item.id.toString()} 
         contentContainerStyle={styles.list}
       />
     </View>

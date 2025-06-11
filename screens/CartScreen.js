@@ -1,4 +1,3 @@
-// src/screens/CartScreen.js
 import React, { useContext, useState } from "react";
 import {
   View,
@@ -21,7 +20,7 @@ const CartScreen = ({ navigation }) => {
   } = useContext(CartContext);
   const [paymentMethod, setPaymentMethod] = useState(null);
 
-  console.log("Items received in CartScreen:", items); // <<--- مهم للتحقق
+  console.log("Items received in CartScreen:", items); //   للتحقق
 
   const handleUpdateQuantity = (itemId, newQuantity) => {
     if (newQuantity < 1) {
@@ -84,7 +83,7 @@ const CartScreen = ({ navigation }) => {
         text: "موافق",
         onPress: () => {
           clearCart();
-          navigation.navigate("Home"); // العودة للرئيسية بعد إتمام الطلب
+          navigation.navigate("Home");
         },
       },
     ]);
@@ -95,7 +94,7 @@ const CartScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>سلة المشتريات</Text>
-      {items && items.length === 0 ? ( // تحقق من items قبل الوصول لـ length
+      {items && items.length === 0 ? (
         <View style={styles.emptyCartContainer}>
           <Text style={styles.emptyCartText}>السلة فارغة!</Text>
           <CustomButton
@@ -107,51 +106,49 @@ const CartScreen = ({ navigation }) => {
         <FlatList
           data={items}
           renderItem={renderCartItem}
-          keyExtractor={(item) => item.id.toString()} // تأكد من أن id موجود ويُحول لنص
+          keyExtractor={(item) => item.id.toString()}
           style={styles.itemList}
         />
       )}
-      {items &&
-        items.length > 0 && ( // تحقق من items قبل الوصول لـ length
-          <>
-            <Text style={styles.totalText}>
-              المجموع الكلي: {totalAmount.toFixed(2)}₪
-            </Text>
-            <View style={styles.paymentContainer}>
-              <Text style={styles.paymentHeader}>اختر طريقة الدفع:</Text>
-              <View style={styles.paymentOptions}>
-                <TouchableOpacity
-                  style={[
-                    styles.paymentButton,
-                    paymentMethod === "cash" && styles.selectedPayment,
-                  ]}
-                  onPress={() => setPaymentMethod("cash")}
-                >
-                  <Text style={styles.paymentButtonTextInternal}>كاش 💵</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[
-                    styles.paymentButton,
-                    paymentMethod === "visa" && styles.selectedPayment,
-                  ]}
-                  onPress={() => setPaymentMethod("visa")}
-                >
-                  <Text style={styles.paymentButtonTextInternal}>فيزا 💳</Text>
-                </TouchableOpacity>
-              </View>
+      {items && items.length > 0 && (
+        <>
+          <Text style={styles.totalText}>
+            المجموع الكلي: {totalAmount.toFixed(2)}₪
+          </Text>
+          <View style={styles.paymentContainer}>
+            <Text style={styles.paymentHeader}>اختر طريقة الدفع:</Text>
+            <View style={styles.paymentOptions}>
+              <TouchableOpacity
+                style={[
+                  styles.paymentButton,
+                  paymentMethod === "cash" && styles.selectedPayment,
+                ]}
+                onPress={() => setPaymentMethod("cash")}
+              >
+                <Text style={styles.paymentButtonTextInternal}>كاش 💵</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.paymentButton,
+                  paymentMethod === "visa" && styles.selectedPayment,
+                ]}
+                onPress={() => setPaymentMethod("visa")}
+              >
+                <Text style={styles.paymentButtonTextInternal}>فيزا 💳</Text>
+              </TouchableOpacity>
             </View>
-            <CustomButton
-              title="إتمام الطلب"
-              onPress={handleCheckout}
-              disabled={items.length === 0}
-            />
-          </>
-        )}
+          </View>
+          <CustomButton
+            title="إتمام الطلب"
+            onPress={handleCheckout}
+            disabled={items.length === 0}
+          />
+        </>
+      )}
     </View>
   );
 };
 
-// الأنماط (styles) تبقى كما هي من ردك السابق
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 15, backgroundColor: "#f8f8f8" },
   header: {

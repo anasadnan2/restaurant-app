@@ -1,4 +1,3 @@
-// src/components/Button.js
 import React from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 
@@ -16,7 +15,7 @@ const CustomButton = ({ onPress, title, style, textStyle, disabled }) => {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "#007bff", // لون أزرق افتراضي
+    backgroundColor: "#007bff",
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 8,
@@ -30,7 +29,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   disabledButton: {
-    backgroundColor: "#c0c0c0", // لون رمادي للزر المعطل
+    backgroundColor: "#c0c0c0", 
   },
 });
 

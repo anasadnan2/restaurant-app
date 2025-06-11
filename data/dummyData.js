@@ -1,4 +1,3 @@
-// src/data/dummyData.js
 export const categoryImages = {
   c1: require("../assets/images/seafoodCategoryImage/ImageCategory.jpeg"),
   c2: require("../assets/images/sandwichesCategoryImage/ImageCategory.jpeg"),
@@ -29,7 +28,7 @@ export const DUMMY_CATEGORIES = [
   {
     id: "c1",
     name: "مأكولات بحرية",
-    // image: seafoodCategoryImage, // استخدم الصورة المستوردة
+    // image: seafoodCategoryImage,
     image: categoryImages.c1,
   },
   {
@@ -74,11 +73,11 @@ export const DUMMY_ITEMS = [
       "سمك طازج مشوي على الفحم مع تتبيلة الليمون والأعشاب الخاصة بنا.",
     ingredients:
       "سمك (حسب الموسم)، ليمون، بهارات مشكلة، زيت زيتون بكر، أعشاب طازجة",
-    price: 85, // تم تعديل السعر
+    price: 85,
     // image: grilledFishImage,
     image: itemImages.i1,
-    averageRating: 4.7, // تم تعديل التقييم
-    totalRatings: 155, // تم تعديل عدد التقييمات
+    averageRating: 4.7,
+    totalRatings: 155,
     comments: [
       {
         id: "comment1_i1",
@@ -104,11 +103,11 @@ export const DUMMY_ITEMS = [
     description:
       "جمبري كبير الحجم، مقلي حتى يصبح ذهبياً ومقرمشاً، يقدم مع صوص التارتار الخاص.",
     ingredients: "جمبري جامبو، دقيق، بيض، بقسماط، بهارات سرية، صوص تارتار",
-    price: 95, // تم تعديل السعر
+    price: 95,
     // image: friedShrimpImage,
     image: itemImages.i2,
-    averageRating: 4.5, // تم تعديل التقييم
-    totalRatings: 110, // تم تعديل عدد التقييمات
+    averageRating: 4.5,
+    totalRatings: 110,
     comments: [
       {
         id: "comment1_i2",
@@ -118,7 +117,7 @@ export const DUMMY_ITEMS = [
     ],
   },
   {
-    id: "i3", // صنف جديد
+    id: "i3",
     categoryId: "c1",
     name: "باستا فواكه البحر",
     description:
@@ -146,12 +145,10 @@ export const DUMMY_ITEMS = [
     description:
       "قطع دجاج متبلة ومشوية بعناية، ملفوفة في خبز عربي طازج مع الثومية والمخلل والبطاطا المقلية.",
     ingredients: "دجاج متبل، خبز عربي، صوص ثوم، مخلل خيار، بطاطا مقلية",
-    price: 30, // تم تعديل السعر
-    // image: chickenShawarmaImage,
+    price: 30,
     image: itemImages.i4,
-    // "https://images.pexels.com/photos/1251198/pexels-photo-1251198.jpeg?auto=compress&cs=tinysrgb&w=600",
-    averageRating: 4.9, // تم تعديل التقييم
-    totalRatings: 320, // تم تعديل عدد التقييمات
+    averageRating: 4.9,
+    totalRatings: 320,
     comments: [
       {
         id: "comment1_i3",
@@ -172,12 +169,10 @@ export const DUMMY_ITEMS = [
     description:
       "أقراص فلافل ذهبية مقرمشة من الخارج وطرية من الداخل، مع سلطة خضراء وطحينة في خبز بلدي.",
     ingredients: "فلافل، خبز بلدي، طماطم، خيار، بقدونس، مخلل لفت، صوص طحينة",
-    price: 15, // تم تعديل السعر
-    // image: falafelSandwichImage,
+    price: 15,
     image: itemImages.i5,
-    // "https://images.pexels.com/photos/4001296/pexels-photo-4001296.jpeg?auto=compress&cs=tinysrgb&w=600",
     averageRating: 4.6,
-    totalRatings: 210, // تم تعديل عدد التقييمات
+    totalRatings: 210,
     comments: [
       {
         id: "comment1_i11",
@@ -187,16 +182,14 @@ export const DUMMY_ITEMS = [
     ],
   },
   {
-    id: "i6", // صنف جديد
+    id: "i6",
     categoryId: "c2",
     name: "برجر لحم كلاسيك",
     description:
       "قطعة لحم بقري صافي مشوية بإتقان، مع خس، طماطم، بصل، مخلل، وصوص خاص في خبز برجر طري.",
     ingredients: "لحم بقري، خبز برجر، خس، طماطم، بصل، مخلل، صوص برجر",
     price: 45,
-    // image: beefBurgerImage,
     image: itemImages.i6,
-    // "https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&w=600",
     averageRating: 4.7,
     totalRatings: 180,
     comments: [
@@ -212,10 +205,8 @@ export const DUMMY_ITEMS = [
     description:
       "أرز بسمتي فاخر مطهو مع بهارات المندي الأصلية وقطع لحم غنم طرية تذوب في الفم، مزين بالزبيب والمكسرات.",
     ingredients: "لحم غنم، أرز بسمتي، بهارات مندي خاصة، زبيب، لوز، صنوبر",
-    price: 130, // تم تعديل السعر
-    // image: meatMandiImage,
+    price: 130,
     image: itemImages.i7,
-    // "https://images.pexels.com/photos/5410410/pexels-photo-5410410.jpeg?auto=compress&cs=tinysrgb&w=600",
     averageRating: 4.9,
     totalRatings: 350,
     comments: [
@@ -235,7 +226,7 @@ export const DUMMY_ITEMS = [
       "قطع دجاج طرية مطهوة ببطء في صلصة الكاري الهندية الغنية بحليب جوز الهند والبهارات العطرية، تقدم مع أرز أبيض.",
     ingredients:
       "دجاج، أرز بسمتي، حليب جوز الهند، معجون كاري، زنجبيل، ثوم، خضروات مشكلة",
-    price: 70, // تم تعديل السعر
+    price: 70,
     // image: chickenCurryImage,
     image: itemImages.i8,
     // "https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -252,7 +243,7 @@ export const DUMMY_ITEMS = [
     description:
       "شوربة عدس أحمر غنية ومغذية، ذات قوام كريمي، تقدم مع خبز محمص وقطرات من زيت الزيتون.",
     ingredients: "عدس أحمر، جزر، بصل، كرفس، بطاطا، مرق دجاج، كمون، زيت زيتون",
-    price: 20, // تم تعديل السعر
+    price: 20,
     // image: lentilSoupImage,
     image: itemImages.i9,
     // "https://images.pexels.com/photos/90893/pexels-photo-90893.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -269,7 +260,7 @@ export const DUMMY_ITEMS = [
     description:
       "حمص بالطحينة ناعم وكريمي، يعلوه قطع لحم مفروم متبلة ومقلية مع صنوبر محمص.",
     ingredients: "حمص، طحينة، ليمون، ثوم، لحم مفروم، صنوبر، زيت زيتون، بهارات",
-    price: 35, // تم تعديل السعر
+    price: 35,
     // image: hummusImage,
     image: itemImages.i10,
     // "https://images.pexels.com/photos/566566/pexels-photo-566566.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -280,7 +271,7 @@ export const DUMMY_ITEMS = [
     ],
   },
   {
-    id: "i11", // صنف جديد
+    id: "i11",
     categoryId: "c5",
     name: "تبولة شامية",
     description:
@@ -302,7 +293,7 @@ export const DUMMY_ITEMS = [
     name: "عصير برتقال طازج",
     description: "عصير برتقال طبيعي 100% معصور عند الطلب، بدون أي إضافات.",
     ingredients: "برتقال طازج",
-    price: 15, // تم تعديل السعر
+    price: 15,
     // image: orangeJuiceImage,
     image: itemImages.i12,
     // "https://images.pexels.com/photos/161559/background-bitter-breakfast-bright-161559.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -317,7 +308,7 @@ export const DUMMY_ITEMS = [
     description:
       "مزيج مثالي من عصير الليمون الحامض وأوراق النعناع الطازجة، يقدم بارداً.",
     ingredients: "ليمون، أوراق نعناع طازجة، سكر (اختياري)، ماء، ثلج",
-    price: 18, // تم تعديل السعر
+    price: 18,
     // image: lemonMintJuiceImage,
     image: itemImages.i13,
     // "https://images.pexels.com/photos/1292294/pexels-photo-1292294.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -333,7 +324,7 @@ export const DUMMY_ITEMS = [
     ],
   },
   {
-    id: "i14", // صنف جديد
+    id: "i14",
     categoryId: "c6",
     name: "كوكا كولا",
     description: "مشروب غازي.",

@@ -1,4 +1,3 @@
-// src/screens/LoginScreen.js
 import React, { useState } from "react";
 import {
   View,
@@ -8,7 +7,7 @@ import {
   TouchableOpacity,
   Alert,
   Image,
-  ScrollView, // <<--- أضف ScrollView إذا أصبحت الشاشة طويلة
+  ScrollView,
 } from "react-native";
 import CustomButton from "../components/Button";
 
@@ -22,7 +21,6 @@ const LoginScreen = ({ navigation, onLoginSuccess }) => {
   const [password, setPassword] = useState("");
 
   const handleLogin = () => {
-    // ... (نفس دالة handleLogin السابقة) ...
     console.log("Attempting login with Email:", email, "Password:", password);
     if (!email.trim() || !password.trim()) {
       Alert.alert("خطأ", "الرجاء إدخال البريد الإلكتروني وكلمة المرور.");
@@ -59,13 +57,9 @@ const LoginScreen = ({ navigation, onLoginSuccess }) => {
   };
 
   return (
-    // استخدام ScrollView إذا كانت المحتويات قد تتجاوز ارتفاع الشاشة
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <View style={styles.container}>
-        <Image
-          source={require("../assets/logo.png")} // استبدل هذا بمسار صورتك
-          style={styles.logo}
-        />
+        <Image source={require("../assets/logo.png")} style={styles.logo} />
         <Text style={styles.title}>تسجيل الدخول</Text>
         <TextInput
           style={styles.input}
@@ -99,7 +93,7 @@ const LoginScreen = ({ navigation, onLoginSuccess }) => {
 
         {/* رابط السياسات وشروط الاستخدام */}
         <TouchableOpacity
-          onPress={() => navigation.navigate("Policy")} // <<--- الانتقال إلى شاشة Policy
+          onPress={() => navigation.navigate("Policy")}
           style={styles.policyLinkContainer}
         >
           <Text style={styles.policyLinkText}>
@@ -115,12 +109,11 @@ const LoginScreen = ({ navigation, onLoginSuccess }) => {
 
 const styles = StyleSheet.create({
   scrollContainer: {
-    // <<--- نمط جديد لـ ScrollView
     flexGrow: 1,
     justifyContent: "center",
   },
   container: {
-    // flex: 1, // أزل هذه إذا كنت تستخدم ScrollView و contentContainerStyle
+    // flex: 1,
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
@@ -131,8 +124,6 @@ const styles = StyleSheet.create({
     height: 120,
     borderRadius: 60,
     marginBottom: 30,
-    // borderWidth: 2,
-    // borderColor: '#007bff',
   },
   title: {
     fontSize: 28,
@@ -158,7 +149,7 @@ const styles = StyleSheet.create({
   },
   linkContainer: {
     marginTop: 20,
-    marginBottom: 15, // إضافة مسافة قبل رابط السياسات
+    marginBottom: 15,
   },
   linkText: {
     color: "#007bff",
@@ -166,21 +157,18 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   policyLinkContainer: {
-    // <<--- نمط لحاوية رابط السياسات
     marginTop: 20,
-    paddingHorizontal: 10, // لإعطاء بعض الهوامش للنص الطويل
+    paddingHorizontal: 10,
   },
   policyLinkText: {
-    // <<--- نمط لنص السياسات
-    color: "#555", // لون أغمق قليلاً
+    color: "#555",
     textAlign: "center",
-    fontSize: 12, // خط أصغر قليلاً
-    lineHeight: 18, // لتباعد الأسطر
+    fontSize: 12,
+    lineHeight: 18,
   },
   underlineText: {
-    // <<--- نمط لجعل النص يبدو كرابط
     textDecorationLine: "underline",
-    color: "#007bff", // نفس لون الروابط الأخرى
+    color: "#007bff",
     fontWeight: "bold",
   },
 });

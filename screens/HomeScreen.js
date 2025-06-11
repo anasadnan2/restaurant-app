@@ -1,9 +1,7 @@
-// src/screens/HomeScreen.js
 import React from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
 import { DUMMY_CATEGORIES } from "../data/dummyData";
 import CategoryCard from "../components/CategoryCard";
-// (لا حاجة لزر السلة هنا إذا كان موجودًا في الهيدر عبر AppNavigator)
 
 const HomeScreen = ({ navigation }) => {
   const renderCategoryItem = ({ item }) => {

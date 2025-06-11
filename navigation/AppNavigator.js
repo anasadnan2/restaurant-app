@@ -1,8 +1,7 @@
-// src/navigation/AppNavigator.js
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { TouchableOpacity, Platform, View, Text } from "react-native"; // View و Text كبديل للأيقونة
-import Icon from "react-native-vector-icons/Ionicons"; // تأكد من تثبيت وربط المكتبة
+import { TouchableOpacity, Platform, View, Text } from "react-native";
+import Icon from "react-native-vector-icons/Ionicons";
 
 import HomeScreen from "../screens/HomeScreen";
 import CategoryItemsScreen from "../screens/CategoryItemsScreen";
@@ -11,13 +10,11 @@ import CartScreen from "../screens/CartScreen";
 
 const Stack = createStackNavigator();
 
-// دالة لإنشاء زر السلة بشكل مشترك
 const CartButton = (navigation) => (
   <TouchableOpacity
     onPress={() => navigation.navigate("Cart")}
     style={{ marginRight: Platform.OS === "ios" ? 10 : 15, padding: 5 }}
   >
-    {/* إذا لم تكن مكتبة الأيقونات مثبتة، استخدم نصًا */}
     {Icon ? (
       <Icon name="cart-outline" size={28} color="#007bff" />
     ) : (
@@ -26,7 +23,6 @@ const CartButton = (navigation) => (
   </TouchableOpacity>
 );
 
-// دالة لإنشاء زر تسجيل الخروج بشكل مشترك
 const LogoutButton = (onLogoutCallback) => (
   <TouchableOpacity
     onPress={onLogoutCallback}
@@ -41,14 +37,12 @@ const LogoutButton = (onLogoutCallback) => (
 );
 
 const AppNavigator = ({ onLogout }) => {
-  // نستقبل onLogout من App.js
   return (
     <Stack.Navigator
       initialRouteName="Home"
       screenOptions={({ navigation }) => ({
-        // screenOptions عامة لجميع الشاشات
         headerTitleAlign: "center",
-        headerLeft: () => LogoutButton(onLogout), // زر تسجيل الخروج على اليسار لجميع الشاشات هنا
+        headerLeft: () => LogoutButton(onLogout),
       })}
     >
       <Stack.Screen
@@ -56,7 +50,7 @@ const AppNavigator = ({ onLogout }) => {
         component={HomeScreen}
         options={({ navigation }) => ({
           title: "الرئيسية",
-          headerRight: () => CartButton(navigation), // زر السلة على اليمين
+          headerRight: () => CartButton(navigation),
         })}
       />
       <Stack.Screen
@@ -80,8 +74,6 @@ const AppNavigator = ({ onLogout }) => {
         component={CartScreen}
         options={{
           title: "سلة المشتريات",
-          // لا حاجة لـ headerRight هنا لأنه لا معنى لزر "السلة" داخل شاشة السلة نفسها
-          // headerLeft سيبقى زر تسجيل الخروج من screenOptions العامة
         }}
       />
     </Stack.Navigator>

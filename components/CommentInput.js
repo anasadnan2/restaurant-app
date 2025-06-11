@@ -11,7 +11,7 @@ const CommentInput = ({ onSubmit }) => {
       return;
     }
     onSubmit(commentText);
-    setCommentText(""); // مسح الحقل بعد الإرسال
+    setCommentText(""); //مسحح التعليق 
   };
 
   return (
@@ -40,9 +40,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     padding: 10,
-    minHeight: 60, // ارتفاع مبدئي لعدة أسطر
+    minHeight: 60, 
     marginBottom: 10,
-    textAlignVertical: "top", // For Android multiline placeholder
+    textAlignVertical: "top", 
   },
 });
 

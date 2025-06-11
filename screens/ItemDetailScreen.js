@@ -1,5 +1,4 @@
-// src/screens/ItemDetailScreen.js
-import React, { useState, useContext, useEffect } from "react"; // أضف useEffect إذا لم يكن موجودًا
+import React, { useState, useContext, useEffect } from "react";
 import {
   ScrollView,
   View,
@@ -18,8 +17,7 @@ import { CartContext } from "../context/CartContext";
 const ItemDetailScreen = ({ route, navigation }) => {
   const { itemId } = route.params;
 
-  // استخدم useEffect للتأكد من أن item يُحدّث عند تغير itemId (مهم إذا كان يمكن الانتقال من تفاصيل صنف لتفاصيل صنف آخر مباشرة)
-  const [item, setItem] = useState(null); // ابدأ بـ null أو undefined
+  const [item, setItem] = useState(null);
   const [comments, setComments] = useState([]);
   const [userRating, setUserRating] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -33,18 +31,16 @@ const ItemDetailScreen = ({ route, navigation }) => {
     if (foundItem) {
       setItem(foundItem);
       setComments(foundItem.comments || []);
-      // إعادة تعيين أي حالة خاصة بالصنف السابق إذا لزم الأمر
       setUserRating(0);
       setQuantity(1);
     } else {
-      // التعامل مع حالة عدم العثور على الصنف
       console.error("ItemDetailScreen: Item not found for ID:", itemId);
-      setItem(null); // أو يمكنك عرض رسالة خطأ أو الانتقال للخلف
+      setItem(null);
       Alert.alert("خطأ", "لم يتم العثور على الصنف المطلوب.", [
         { text: "موافق", onPress: () => navigation.goBack() },
       ]);
     }
-  }, [itemId]); // أعد تشغيل هذا الـ effect إذا تغير itemId
+  }, [itemId]);
 
   const getCategoryName = (categoryId) => {
     if (!categoryId) return "غير معروف";
@@ -59,7 +55,6 @@ const ItemDetailScreen = ({ route, navigation }) => {
       user: "المستخدم الحالي",
     };
     setComments((prevComments) => [newComment, ...prevComments]);
-    // TODO: Send comment to backend (تحديث DUMMY_ITEMS إذا أردت استمرارية وهمية)
     Alert.alert("شكراً!", "تم إضافة تعليقك.");
   };
 
@@ -67,14 +62,12 @@ const ItemDetailScreen = ({ route, navigation }) => {
     setUserRating(rating);
     Alert.alert("شكراً!", `لقد قيمت هذا الصنف بـ ${rating} نجوم.`);
     if (item) {
-      // تحديث التقييم المحلي للعرض
       const currentTotalRatingPoints =
         (item.averageRating || 0) * (item.totalRatings || 0);
       const newTotalRatings = (item.totalRatings || 0) + 1;
       const newAverageRating =
         (currentTotalRatingPoints + rating) / newTotalRatings;
       setItem((prevItem) => ({
-        // تحديث حالة الصنف
         ...prevItem,
         averageRating: parseFloat(newAverageRating.toFixed(1)),
         totalRatings: newTotalRatings,
@@ -83,7 +76,6 @@ const ItemDetailScreen = ({ route, navigation }) => {
     console.log(
       `ItemDetailScreen: Item ${item?.id} rated ${rating} stars by current user.`
     );
-    // TODO: Send rating to backend
   };
 
   const handleAddToCart = () => {
@@ -104,19 +96,16 @@ const ItemDetailScreen = ({ route, navigation }) => {
     }
   };
 
-  // عرض شاشة تحميل أو رسالة إذا كان الصنف لم يُحمّل بعد أو غير موجود
   if (!item) {
     return (
       <View style={styles.centered}>
         <Text>جاري تحميل بيانات الصنف...</Text>
-        {/* يمكنك إضافة ActivityIndicator هنا إذا أردت */}
       </View>
     );
   }
 
   return (
     <ScrollView style={styles.container}>
-      {/* --- تعديل كود عرض الصورة هنا --- */}
       {item.image ? (
         <Image
           source={
@@ -127,7 +116,7 @@ const ItemDetailScreen = ({ route, navigation }) => {
             console.log(
               "Failed to load item image in ItemDetailScreen:",
               item.name,
-              item.image, // قيمة item.image التي فشلت
+              item.image,
               e.nativeEvent.error
             )
           }
@@ -137,7 +126,6 @@ const ItemDetailScreen = ({ route, navigation }) => {
           <Text>لا توجد صورة متاحة</Text>
         </View>
       )}
-      {/* --- نهاية تعديل كود عرض الصورة --- */}
 
       <View style={styles.detailsContainer}>
         <Text style={styles.itemName}>{item.name}</Text>
@@ -202,8 +190,7 @@ const ItemDetailScreen = ({ route, navigation }) => {
                 <Text style={styles.commentText}>{comment.text}</Text>
               </View>
             )}
-            scrollEnabled={false} // مهم إذا كانت FlatList داخل ScrollView
-            // يمكن إضافة ListEmptyComponent لعرض رسالة إذا كانت التعليقات فارغة بعد التصفية
+            scrollEnabled={false}
           />
         ) : (
           <Text style={styles.noCommentsText}>
@@ -229,95 +216,93 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: 280, // يمكن زيادة ارتفاع الصورة قليلاً
+    height: 280,
     resizeMode: "cover",
-    backgroundColor: "#f0f0f0", // لون احتياطي خفيف إذا لم يتم تحميل الصورة بسرعة
+    backgroundColor: "#f0f0f0",
   },
   placeholderImageDetail: {
-    // backgroundColor: "#e0e0e0", // تم تضمينه في style.image
     justifyContent: "center",
     alignItems: "center",
-    // height: 280, // تم تضمينه في style.image
   },
   detailsContainer: {
     padding: 20,
   },
   itemName: {
-    fontSize: 26, // حجم أكبر قليلاً لاسم الصنف
+    fontSize: 26,
     fontWeight: "bold",
-    marginBottom: 8, // زيادة المسافة
+    marginBottom: 8,
     color: "#333",
     textAlign: "right",
   },
   categoryName: {
-    fontSize: 17, // حجم أكبر قليلاً
-    color: "#666", // لون أغمق قليلاً
-    marginBottom: 12, // زيادة المسافة
+    fontSize: 17,
+    color: "#666",
+    marginBottom: 12,
     textAlign: "right",
   },
   price: {
-    fontSize: 22, // حجم أكبر قليلاً
+    fontSize: 22,
     fontWeight: "bold",
-    color: "#28a745", // أخضر أكثر وضوحًا
-    marginBottom: 20, // زيادة المسافة
+    color: "#28a745",
+    marginBottom: 20,
     textAlign: "right",
   },
   sectionTitle: {
-    fontSize: 20, // حجم أكبر قليلاً
-    fontWeight: "600", // خط أعرض قليلاً
-    marginTop: 25, // زيادة المسافة
+    fontSize: 20,
+    fontWeight: "600",
+    marginTop: 25,
     marginBottom: 12,
     borderBottomWidth: 1,
-    borderBottomColor: "#e0e0e0", // لون حد أفتح
-    paddingBottom: 8, // زيادة padding
+    borderBottomColor: "#e0e0e0",
+    paddingBottom: 8,
     color: "#444",
     textAlign: "right",
   },
   description: {
     fontSize: 16,
-    lineHeight: 26, // زيادة تباعد الأسطر
+    lineHeight: 26,
     color: "#555",
     textAlign: "right",
-    marginBottom: 10, // مسافة بعد الوصف والمكونات
+    marginBottom: 10,
   },
   addToCartContainer: {
-    marginVertical: 25, // زيادة المسافة
+    marginVertical: 25,
     alignItems: "center",
   },
   quantityLabel: {
     fontSize: 17,
-    marginBottom: 10, // زيادة المسافة
+    marginBottom: 10,
     color: "#333",
     fontWeight: "500",
   },
   quantityControls: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 20, // زيادة المسافة
+    marginBottom: 20,
   },
   quantityButton: {
-    width: 44, // زيادة حجم الزر قليلاً
+    width: 44,
     height: 44,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#e9ecef", // لون خلفية أفتح
-    borderRadius: 22, // لجعلها دائرية
-    marginHorizontal: 12, // زيادة المسافة
+    backgroundColor: "#e9ecef",
+    borderRadius: 22,
+    marginHorizontal: 12,
   },
   quantityButtonText: {
-    fontSize: 24, // حجم أكبر للأيقونات +/-
-    color: "#007bff", // لون أزرق
+    fontSize: 24,
+    color: "#007bff",
     fontWeight: "bold",
   },
   quantityValue: {
-    fontSize: 20, // حجم أكبر للرقم
+    fontSize: 20,
     fontWeight: "bold",
     minWidth: 35,
     textAlign: "center",
     color: "#333",
   },
   commentContainer: {
-    backgroundColor: "#f8f9fa", // لون خلفية أفتح للتعليقات
+    backgroundColor: "#f8f9fa",
     padding: 15,
     borderRadius: 8,
     marginBottom: 12,
@@ -331,9 +316,9 @@ const styles = StyleSheet.create({
     textAlign: "right",
   },
   commentText: {
-    fontSize: 15, // حجم أكبر قليلاً لنص التعليق
+    fontSize: 15,
     lineHeight: 22,
-    color: "#495057", // لون أغمق قليلاً لنص التعليق
+    color: "#495057",
     textAlign: "right",
   },
   noCommentsText: {

@@ -1,5 +1,4 @@
-// src/screens/SignupScreen.js
-import React, { useState } from "react"; // <<--- تأكد من استيراد useState
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -9,13 +8,9 @@ import {
   ScrollView,
   Alert,
 } from "react-native";
-import CustomButton from "../components/Button"; // استخدام الزر المخصص
-
-// (اختياري) لتخزين المستخدمين الجدد بشكل وهمي (لن يتم استخدامه مباشرة للدخول في هذا المثال)
-// let FAKE_REGISTERED_USERS = [];
+import CustomButton from "../components/Button";
 
 const SignupScreen = ({ navigation, onLoginSuccess }) => {
-  // onLoginSuccess إذا أردت تسجيل دخول تلقائي
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,7 +26,6 @@ const SignupScreen = ({ navigation, onLoginSuccess }) => {
       Alert.alert("خطأ", "الرجاء ملء جميع الحقول");
       return;
     }
-    // تحقق بسيط من شكل الإيميل
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       Alert.alert("خطأ", "الرجاء إدخال بريد إلكتروني صالح.");
@@ -47,20 +41,10 @@ const SignupScreen = ({ navigation, onLoginSuccess }) => {
     }
 
     const newUser = { username, email: email.toLowerCase(), password };
-    // FAKE_REGISTERED_USERS.push(newUser);
     console.log("New user registered (simulated):", newUser);
 
     Alert.alert("نجاح", "تم إنشاء الحساب بنجاح! يمكنك الآن تسجيل الدخول.", [
       { text: "موافق", onPress: () => navigation.navigate("Login") },
-      // إذا أردت تسجيل دخول تلقائي بعد التسجيل (يتطلب تعديل منطق LoginScreen ليتعرف على المستخدم الجديد):
-      // { text: "موافق وتسجيل الدخول", onPress: () => {
-      //     // هنا يجب تعديل FAKE_USER في LoginScreen أو استخدام آلية أخرى
-      //     // لجعل LoginScreen تتعرف على newUser
-      //     if (typeof onLoginSuccess === 'function') {
-      //       onLoginSuccess();
-      //     }
-      //   }
-      // }
     ]);
   };
 
@@ -89,7 +73,7 @@ const SignupScreen = ({ navigation, onLoginSuccess }) => {
         value={password}
         onChangeText={setPassword}
         secureTextEntry
-        textContentType="newPassword" // مساعدة لمدير كلمات المرور
+        textContentType="newPassword"
       />
       <TextInput
         style={styles.input}
@@ -110,10 +94,9 @@ const SignupScreen = ({ navigation, onLoginSuccess }) => {
   );
 };
 
-// استخدام نفس أنماط LoginScreen مع تعديلات طفيفة إذا لزم الأمر
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1, // للسماح بالتمرير إذا كانت الحقول كثيرة
+    flexGrow: 1,
     justifyContent: "center",
     padding: 20,
     backgroundColor: "#f5f5f5",

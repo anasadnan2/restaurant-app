@@ -1,4 +1,4 @@
-// src/App.js
+//App.js
 import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -41,11 +41,6 @@ const App = () => {
     try {
       await AsyncStorage.removeItem("userLoggedIn");
       setIsLoggedIn(false);
-      // يمكنك إضافة منطق إضافي هنا، مثل مسح سلة المشتريات إذا أردت
-      // import { useContext } from 'react';
-      // import { CartContext } from './context/CartContext';
-      // const cartCtx = useContext(CartContext);
-      // cartCtx.clearCart();
       console.log("App.js: User logged out and status cleared.");
     } catch (e) {
       console.error("App.js: Failed to remove user login status", e);
